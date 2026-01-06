@@ -2489,3 +2489,7 @@ body.resume-opened .deebo_fn__cv .cv__bg2{
 		height: inherit;
 	}
 }
+
+body{
+	border: 5px solid green;
+}
