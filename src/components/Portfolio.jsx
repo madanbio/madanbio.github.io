@@ -30,7 +30,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="" href="https://socialjustice.gov.in/" target="_blank">
 												<img src="assets/img/thumb/42-56.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project1.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project1.jpg"></div>
 												<div className="mobile_title">
 													<h6>Ministry of Social Justice & Empowerment</h6>
 													<span>Government of India</span>
@@ -44,7 +44,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="" href="https://pmajay.dosje.gov.in/" target="_blank">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project2.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project2.jpg"></div>
 												<div className="mobile_title">
 													<h6>Pradhan Mantri Anusuchit Jaati Abhyuday Yojna</h6>
 													<span>PM-AJAY</span>
@@ -58,7 +58,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="" href="https://pmagy.gov.in/" target="_blank">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project3.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project3.jpg"></div>
 												<div className="mobile_title">
 													<h6>Pradhan Mantri Adarsh Gram Yojna</h6>
 													<span>PMAGY</span>
@@ -72,7 +72,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="" href="https://cloud.goskribe.com/" target="_blank">
 												<img src="assets/img/thumb/42-56.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project4.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project4.jpg"></div>
 												<div className="mobile_title">
 													<h6>Janga Media Pvt. Ltd.</h6>
 													<span>Goskribe</span>
@@ -86,7 +86,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="" href="https://www.tuitionindia.in/" target="_blank">
 												<img src="assets/img/thumb/42-56.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project5.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project5.jpg"></div>
 												<div className="mobile_title">
 													<h6>Gyanet Education Pvt. Ltd.</h6>
 													<span>Tuition India</span>
@@ -100,7 +100,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="zoom" href="src/assets/img/portfolio/project6.jpg">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project6.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project6.jpg"></div>
 											</a>
 										</div>
 									</div>
@@ -110,7 +110,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="soundcloude_link mfp-iframe audio" href="src/assets/img/portfolio/project7.jpg">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project7.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project7.jpg"></div>
 											</a>
 										</div>
 									</div>
@@ -120,7 +120,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="zoom" href="src/assets/img/portfolio/project8.jpg">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/project8.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/project8.jpg"></div>
 											</a>
 										</div>
 									</div>
@@ -130,7 +130,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="popup-youtube" href="https://www.youtube.com/watch?v=jZJd0FYKk3Y">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/video1.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/video1.jpg"></div>
 											</a>
 										</div>
 									</div>
@@ -140,7 +140,7 @@ export default function Portfolio() {
 										<div className="entry">
 											<a className="popup-youtube" href="https://www.youtube.com/watch?v=OJ3VPbqRpxw">
 												<img src="assets/img/thumb/42-34.jpg" alt="" />
-												<div className="main" data-bg-img="src/assets/img/portfolio/video2.jpg"></div>
+												<div className="main" data-bg-img="assets/img/portfolio/video2.jpg"></div>
 											</a>
 										</div>
 									</div>

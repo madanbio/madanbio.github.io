@@ -4,7 +4,7 @@ export default function Hero() {
 					<div className="content">
 						<div className="left_hero_header">
 							<div className="circle">
-								<div className="bg_img" data-bg-img="src/assets/img/header/photo.jpg"></div>
+								<div className="bg_img" data-bg-img="assets/img/header/photo.jpg"></div>
 								<img src="assets/img/thumb/square.jpg" alt="" />
 								<div className="circle_holder_blue"><span></span></div>
 								<div className="circle_holder_orange"><span></span></div>
