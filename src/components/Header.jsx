@@ -5,7 +5,7 @@ export default function Header() {
 						<img src="assets/signature/gif.gif" alt="Sonu Das Madan UIUX mmsonu67"/>
 					</div>
 					<h3><span>Madan</span> Mohan</h3>
-					<p className="quote">I'm a passionate UI/UX Designer and Developer who excels at creating pixel-perfect web interfaces. I’m also available for a freelance job. <a href="#contact" className="anchor">Hire me</a> <a href="img/cv/madan_cv.pdf" target="_blank">Download CV</a></p>
+					<p className="quote">I'm a passionate UI/UX Designer and Developer who excels at creating pixel-perfect web interfaces. I’m also available for a freelance job. <a href="#contact" className="anchor">Hire me</a> <a href="assets/img/cv/madan_cv.pdf" target="_blank">Download CV</a></p>
 					<ul className="contact_info">
 						<li>
 							<span className="icon"><img src="assets/svg/location.svg" alt="" className="fn__svg"/></span>
