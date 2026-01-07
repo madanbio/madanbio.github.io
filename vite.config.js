@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/",        // ✅ correct for username.github.io repo
+  base: "/madanbio.github.io/", // ✅ FIX
 });
