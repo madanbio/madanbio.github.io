@@ -2,7 +2,7 @@
   'use strict';
 
   window.onload = function() {
-    let message = localStorage.getItem("message") || ' ';
+    let message = localStorage.getItem("message") || 'Your Message';
     $('#message').html(message);
     $('#display').html(message);
   }
