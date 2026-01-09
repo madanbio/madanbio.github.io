@@ -70,7 +70,7 @@ export default function Contact() {
                   type="text"
                   name="company"
                   placeholder="Company Name"
-
+                  autocomplete="organization"
                 />
               </div>
             </div>
@@ -83,7 +83,7 @@ export default function Contact() {
                   id="message"
                   name="message"
                   placeholder="Your Message"
-                  autoComplete="organization"
+                  autoComplete="message"
                   required 
                 ></textarea>
               </div>
