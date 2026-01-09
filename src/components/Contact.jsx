@@ -100,7 +100,7 @@ export default function Contact() {
             <input
               type="hidden"
               name="_next"
-              value="https://madanprofile.github.io/contact.html"
+              value="https://madanpbio.github.io/contact.html"
             />
             <input type="text" name="_honey" style={{ display: "none" }} />
 
