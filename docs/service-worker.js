@@ -1,8 +1,8 @@
-var dataCacheName = 'mmsonu_v1';
+var dataCacheName = 'mmsonu_v2';
 
-var cacheName = 'mmsonu_v1';
+var cacheName = 'mmsonu_v2';
 
-caches.delete('mmsonu_v4');
+caches.delete('mmsonu_v1');
 
 var filesToCache = [
 
