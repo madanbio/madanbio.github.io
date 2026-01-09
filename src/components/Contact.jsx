@@ -24,6 +24,7 @@ export default function Contact() {
                   placeholder="Your Name"
                   required
                   aria-required="true"
+                  autocomplete="name"
                 />
               </div>
             </div>
@@ -39,6 +40,7 @@ export default function Contact() {
                   placeholder="Your Email"
                   required
                   aria-required="true"
+                  autocomplete="email"
                 />
               </div>
             </div>
@@ -54,6 +56,7 @@ export default function Contact() {
                   placeholder="Phone Number"
                   required
                   minLength="10"
+                  autocomplete="phone"
                 />
               </div>
             </div>
@@ -67,6 +70,7 @@ export default function Contact() {
                   type="text"
                   name="company"
                   placeholder="Company Name"
+
                 />
               </div>
             </div>
@@ -79,8 +83,8 @@ export default function Contact() {
                   id="message"
                   name="message"
                   placeholder="Your Message"
-                  required
-                  aria-required="true"
+                  autoComplete="organization"
+                  required 
                 ></textarea>
               </div>
             </div>
@@ -96,7 +100,7 @@ export default function Contact() {
             <input
               type="hidden"
               name="_next"
-              value="https://madanbio.github.io/contact.html"
+              value="https://madanprofile.github.io/contact.html"
             />
             <input type="text" name="_honey" style={{ display: "none" }} />
 
