@@ -34,7 +34,7 @@ export default function Home() {
 
         <div className="cv__content">
           <Hero />
-          <Link to="success">ContactSuccess</Link>
+          {/* <Link to="success">ContactSuccess</Link> */}
           <Biography />
           <Education />
           <Experience />
