@@ -1,143 +1,98 @@
-var dataCacheName = 'mmsonu_v1';
+/* ================================
+   Service Worker for madanbio.github.io
+   Compatible with GitHub Pages + Vite
+================================ */
 
-var cacheName = 'mmsonu_v1';
+const CACHE_NAME = 'madanbio-cache-v1';
 
-caches.delete('mmsonu_v4');
-
-var filesToCache = [
-
-  '/',
-
- "./fonts",
-
- "./img",
-
- "./img/icons",
-
- "./img/icons/icon-72x72.png",
-
- "./img/icons/icon-96x96.png",
-
- "./img/icons/icon-128x128.png",
-
- "./assets/img/icons/icon-144x144.png",
-
- "./img/icons/icon-152x152.png",
-
- "./img/icons/icon-192x192.png",
-
- "./img/icons/icon-256x256.png",
-
- "./img/icons/icon-384x384.png",
-
- "./img/icons/icon-512x512.png",
-
- "./index.html",
- 
- "./portfolio.html",
- 
- "./contact.html",
- 
- "./index.php",
-
- "./graphic.php",
-
- "./portfolio.php",
-
- "./portfolio2.php",
-
- "./contact.php",
-
- "./quiz.php",
-
- "./quiz_question.php",
-
- "./manifest.json",
-
- "./css",
-
- "./css/animation.css",
-
- "./css/aos.css",
-
- "./css/style.css",
-
- "./js",
-
- "./js/app.js",
-
- "./js/aos.js",
-
- "./js/customize.js",
-
- "./service-worker.js"
-
+// Only cache SAFE & STATIC files
+const APP_SHELL = [
+  './',                 // important for GitHub Pages
+  './index.html',
+  './manifest.webmanifest'
 ];
 
-
-
-self.addEventListener('install', function(e) {
-
+/* -------------------------------
+   INSTALL
+-------------------------------- */
+self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] Install');
 
-  e.waitUntil(
-
-    caches.open(cacheName).then(function(cache) {
-
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(async (cache) => {
       console.log('[ServiceWorker] Caching app shell');
 
-      return cache.addAll(filesToCache);
-
+      for (const url of APP_SHELL) {
+        try {
+          await cache.add(url);
+          console.log('[ServiceWorker] Cached:', url);
+        } catch (err) {
+          console.error('[ServiceWorker] Failed to cache:', url, err);
+        }
+      }
     })
-
   );
 
+  self.skipWaiting();
 });
 
-
-
-self.addEventListener('activate', function(e) {
-
+/* -------------------------------
+   ACTIVATE
+-------------------------------- */
+self.addEventListener('activate', (event) => {
   console.log('[ServiceWorker] Activate');
 
-  e.waitUntil(
-
-    caches.keys().then(function(keyList) {
-
-      return Promise.all(keyList.map(function(key) {
-
-        if (key !== cacheName && key !== dataCacheName) {
-
-          console.log('[ServiceWorker] Removing old cache', key);
-
-          return caches.delete(key);
-
-        }
-
-      }));
-
-    })
-
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            console.log('[ServiceWorker] Removing old cache:', key);
+            return caches.delete(key);
+          }
+        })
+      )
+    )
   );
 
-  return self.clients.claim();
-
+  self.clients.claim();
 });
 
+/* -------------------------------
+   FETCH (Cache First, then Network)
+-------------------------------- */
+self.addEventListener('fetch', (event) => {
+  // Only handle GET requests
+  if (event.request.method !== 'GET') return;
 
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
 
-self.addEventListener('fetch', function(e) {
+      return fetch(event.request)
+        .then((networkResponse) => {
+          // Cache successful responses only
+          if (
+            networkResponse &&
+            networkResponse.status === 200 &&
+            networkResponse.type === 'basic'
+          ) {
+            const responseClone = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseClone);
+            });
+          }
 
-  console.log('[Service Worker] Fetch', e.request.url);
-
-  e.respondWith(
-
-    caches.match(e.request).then(function(response) {
-
-      return response || fetch(e.request);
-
+          return networkResponse;
+        })
+        .catch(() => {
+          // Offline fallback for navigation
+          if (event.request.mode === 'navigate') {
+            return caches.match('./index.html');
+          }
+        });
     })
-
   );
-
 });
