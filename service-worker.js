@@ -1,9 +1,3 @@
-/* ================================
-   Service Worker for madanbio.github.io
-   GitHub Pages + Vite SAFE version
-================================ */
-
-const CACHE_NAME = 'madanbio-cache-v1';
 
 const APP_SHELL = [
   '/',                 // IMPORTANT: use absolute root
@@ -11,22 +5,23 @@ const APP_SHELL = [
   '/manifest.webmanifest'
 ];
 
-/* -------------------------------
-   INSTALL
--------------------------------- */
+const CACHE_NAME = 'madanbio-cache-v2';
+
 self.addEventListener('install', (event) => {
-  console.log('[ServiceWorker] Install');
-
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Caching app shell');
-      return cache.addAll(APP_SHELL);
-    })
-  );
-
   self.skipWaiting();
 });
 
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.filter(k => k !== CACHE_NAME)
+            .map(k => caches.delete(k))
+      )
+    )
+  );
+  self.clients.claim();
+}); 
 /* -------------------------------
    ACTIVATE
 -------------------------------- */
