@@ -2,7 +2,7 @@
   "name": "MadanBio",
   "short_name": "MadanBio",
   "description": "Personal portfolio and profile of Madan Mohan",
-  "start_url": "./index.html",
+  "start_url": "index.html",
   "scope": "/",
   "display": "fullscreen",
   "background_color": "#fff",
@@ -10,25 +10,25 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "img/icons/icon-192x192.png",
+      "src": "assets/img/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "img/icons/icon-512x512.png",
+      "src": "assets/img/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
   "screenshots": [
   {
-    "src": "img/screenshots/mobile-1.png",
+    "src": "assets/img/screenshots/mobile-1.png",
     "sizes": "360x640",
     "type": "image/png",
     "platform": "narrow"
   },
   {
-    "src": "img/screenshots/desktop-1.jpg",
+    "src": "assets/img/screenshots/desktop-1.jpg",
     "sizes": "1280x720",
     "type": "image/jpg",
     "platform": "wide"
