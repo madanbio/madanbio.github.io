@@ -1,93 +1,47 @@
+// This is the "Offline page" service worker
 
-const APP_SHELL = [
-  '/',                 // IMPORTANT: use absolute root
-  '/index.html',
-  '/manifest.webmanifest'
-];
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-const CACHE_NAME = 'madanbio-cache-v2';
+const CACHE = "pwabuilder-page";
 
-self.addEventListener('install', (event) => {
-  self.skipWaiting();
-});
+// TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
+const offlineFallbackPage = "ToDo-replace-this-name.html";
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(
-        keys.filter(k => k !== CACHE_NAME)
-            .map(k => caches.delete(k))
-      )
-    )
-  );
-  self.clients.claim();
-}); 
-/* -------------------------------
-   ACTIVATE
--------------------------------- */
-self.addEventListener('activate', (event) => {
-  console.log('[ServiceWorker] Activate');
-
-  event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => {
-            console.log('[ServiceWorker] Removing old cache:', key);
-            return caches.delete(key);
-          })
-      )
-    )
-  );
-
-  self.clients.claim();
-});
-
-/* -------------------------------
-   FETCH (Network First for HTML)
--------------------------------- */
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-
-  // Handle navigation (React Router / Vite)
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request)
-        .then((response) => {
-          return response;
-        })
-        .catch(() => {
-          return caches.match('/index.html');
-        })
-    );
-    return;
+self.addEventListener("message", (event) => {
+  if (event.data && event.data.type === "SKIP_WAITING") {
+    self.skipWaiting();
   }
+});
 
-  // Static assets (CSS, JS, images)
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
+self.addEventListener('install', async (event) => {
+  event.waitUntil(
+    caches.open(CACHE)
+      .then((cache) => cache.add(offlineFallbackPage))
+  );
+});
 
-      return fetch(event.request).then((networkResponse) => {
-        if (
-          networkResponse &&
-          networkResponse.status === 200 &&
-          networkResponse.type === 'basic'
-        ) {
-          const responseClone = networkResponse.clone();
+if (workbox.navigationPreload.isSupported()) {
+  workbox.navigationPreload.enable();
+}
 
-          event.waitUntil(
-            caches.open(CACHE_NAME).then((cache) => {
-              return cache.put(event.request, responseClone);
-            })
-          );
+self.addEventListener('fetch', (event) => {
+  if (event.request.mode === 'navigate') {
+    event.respondWith((async () => {
+      try {
+        const preloadResp = await event.preloadResponse;
+
+        if (preloadResp) {
+          return preloadResp;
         }
 
-        return networkResponse;
-      });
-    })
-  );
+        const networkResp = await fetch(event.request);
+        return networkResp;
+      } catch (error) {
+
+        const cache = await caches.open(CACHE);
+        const cachedResp = await cache.match(offlineFallbackPage);
+        return cachedResp;
+      }
+    })());
+  }
 });
