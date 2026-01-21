@@ -6,9 +6,9 @@
 const CACHE_NAME = 'madanbio-cache-v1';
 
 const APP_SHELL = [
-  'https://madanbio.github.io',                 // IMPORTANT: use absolute root
-  'https://madanbio.github.io/index.html',
-  'https://madanbio.github.io/manifest.webmanifest'
+  '/',                 // IMPORTANT: use absolute root
+  '/index.html',
+  '/manifest.webmanifest'
 ];
 
 /* -------------------------------
