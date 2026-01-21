@@ -1,12 +1,12 @@
 {
-  "name": "Madan Bio",
+  "name": "MadanBio",
   "short_name": "MadanBio",
   "description": "Personal portfolio and profile of Madan Mohan",
-  "start_url": "./",
+  "start_url": "./index.html",
   "scope": "./",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0d6efd",
+  "display": "fullscreen",
+  "background_color": "#fff",
+  "theme_color": "#078acf",
   "orientation": "portrait",
   "icons": [
     {
