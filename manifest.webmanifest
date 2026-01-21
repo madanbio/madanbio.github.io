@@ -2,48 +2,55 @@
   "name": "MadanBio",
   "short_name": "MadanBio",
   "description": "Personal portfolio and profile of Madan Mohan",
-  "start_url": "index.html",
+
+  "id": "/",
+  "start_url": "/",
   "scope": "/",
-  "display": "fullscreen",
-  "background_color": "#fff",
+
+  "display": "standalone",
+  "background_color": "#ffffff",
   "theme_color": "#078acf",
   "orientation": "portrait",
+
   "icons": [
     {
-      "src": "assets/img/icons/icon-192x192.png",
+      "src": "/assets/img/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "assets/img/icons/icon-512x512.png",
+      "src": "/assets/img/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
+
   "screenshots": [
-  {
-    "src": "assets/img/screenshots/mobile-1.png",
-    "sizes": "360x640",
-    "type": "image/png",
-    "platform": "narrow"
-  },
-  {
-    "src": "assets/img/screenshots/desktop-1.jpg",
-    "sizes": "1280x720",
-    "type": "image/jpg",
-    "platform": "wide"
-  }
-],
-"shortcuts": [
-  {
-    "name": "Succcess",
-    "url": "#/suceess"
-  },
-  {
-    "name": "Send Message",
-    "url": "#/new-message",
-    "description": "Open a chat with another user and send a message to them."
-  }
-]
+    {
+      "src": "/assets/img/screenshots/mobile-1.png",
+      "sizes": "360x640",
+      "type": "image/png",
+      "platform": "narrow"
+    },
+    {
+      "src": "/assets/img/screenshots/desktop-1.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "platform": "wide"
+    }
+  ],
+
+  "shortcuts": [
+    {
+      "name": "Success Page",
+      "short_name": "Success",
+      "url": "/success"
+    },
+    {
+      "name": "Send Message",
+      "short_name": "Message",
+      "url": "/new-message",
+      "description": "Open a chat page to send a message"
+    }
+  ]
 }
- 
