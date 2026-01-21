@@ -1,15 +1,14 @@
 /* ================================
    Service Worker for madanbio.github.io
-   Compatible with GitHub Pages + Vite
+   GitHub Pages + Vite SAFE version
 ================================ */
 
 const CACHE_NAME = 'madanbio-cache-v1';
 
-// Only cache SAFE & STATIC files
 const APP_SHELL = [
-  './',                 // important for GitHub Pages
-  './index.html',
-  './manifest.webmanifest'
+  'https://madanbio.github.io',                 // IMPORTANT: use absolute root
+  'https://madanbio.github.io/index.html',
+  'https://madanbio.github.io/manifest.webmanifest'
 ];
 
 /* -------------------------------
@@ -19,17 +18,9 @@ self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] Install');
 
   event.waitUntil(
-    caches.open(CACHE_NAME).then(async (cache) => {
+    caches.open(CACHE_NAME).then((cache) => {
       console.log('[ServiceWorker] Caching app shell');
-
-      for (const url of APP_SHELL) {
-        try {
-          await cache.add(url);
-          console.log('[ServiceWorker] Cached:', url);
-        } catch (err) {
-          console.error('[ServiceWorker] Failed to cache:', url, err);
-        }
-      }
+      return cache.addAll(APP_SHELL);
     })
   );
 
@@ -45,12 +36,12 @@ self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) {
+        keys
+          .filter((key) => key !== CACHE_NAME)
+          .map((key) => {
             console.log('[ServiceWorker] Removing old cache:', key);
             return caches.delete(key);
-          }
-        })
+          })
       )
     )
   );
@@ -59,40 +50,49 @@ self.addEventListener('activate', (event) => {
 });
 
 /* -------------------------------
-   FETCH (Cache First, then Network)
+   FETCH (Network First for HTML)
 -------------------------------- */
 self.addEventListener('fetch', (event) => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
+  // Handle navigation (React Router / Vite)
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          return response;
+        })
+        .catch(() => {
+          return caches.match('/index.html');
+        })
+    );
+    return;
+  }
+
+  // Static assets (CSS, JS, images)
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
 
-      return fetch(event.request)
-        .then((networkResponse) => {
-          // Cache successful responses only
-          if (
-            networkResponse &&
-            networkResponse.status === 200 &&
-            networkResponse.type === 'basic'
-          ) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone);
-            });
-          }
+      return fetch(event.request).then((networkResponse) => {
+        if (
+          networkResponse &&
+          networkResponse.status === 200 &&
+          networkResponse.type === 'basic'
+        ) {
+          const responseClone = networkResponse.clone();
 
-          return networkResponse;
-        })
-        .catch(() => {
-          // Offline fallback for navigation
-          if (event.request.mode === 'navigate') {
-            return caches.match('./index.html');
-          }
-        });
+          event.waitUntil(
+            caches.open(CACHE_NAME).then((cache) => {
+              return cache.put(event.request, responseClone);
+            })
+          );
+        }
+
+        return networkResponse;
+      });
     })
   );
 });
