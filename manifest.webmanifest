@@ -37,11 +37,11 @@
 "shortcuts": [
   {
     "name": "Succcess",
-    "url": "/suceess"
+    "url": "#/suceess"
   },
   {
     "name": "Send Message",
-    "url": "/new-message",
+    "url": "#/new-message",
     "description": "Open a chat with another user and send a message to them."
   }
 ]
