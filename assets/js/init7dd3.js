@@ -1,13 +1,17 @@
-$.fn.DeeboProgressIsInViewport = function(content) {
-	"use strict";
-	return $(this).offset().top - content.outerHeight();
-};
-/*
- * Copyright (c) 2021 Frenify
- * Author: Frenify
- * This file is made for CURRENT TEMPLATE
-*/
+$.fn.DeeboProgressIsInViewport = function (content) {
+  "use strict";
 
+  if (!this.length || !content || !content.length) {
+    return null; // or false
+  }
+
+  const offset = this.offset();
+  if (!offset) {
+    return null;
+  }
+
+  return offset.top - content.outerHeight();
+};
 
 (function($){
   "use strict";
