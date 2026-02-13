@@ -1,5 +1,5 @@
-const CACHE_NAME = "app-cache-v1";
-const OFFLINE_URL = "/offline.html";
+const CACHE_NAME = "app-cache-v2";
+//const OFFLINE_URL = "/offline.html";
 
 // Install
 self.addEventListener("install", (event) => {
